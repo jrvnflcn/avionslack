@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useData } from "../context/DataProvider";
 import axios from "axios";
 import { API_URL } from "../constants/Constants";
+import Channels from "./Channels/Channels";
 
 function Dashboard(props) {
   const { onLogout } = props;
@@ -20,15 +21,16 @@ function Dashboard(props) {
     }
   }
 
-  useEffect(() => {
-    if(userList.length === 0) {
-      getUsers();
-    }
-  })
+  // useEffect(() => {
+  //   if(userList.length === 0) {
+  //     getUsers();
+  //   }
+  // })
 
   return (
     <div style={{ textAlign: "center" }}>
       <h2>Dashboard</h2>
+      <Channels />
       <p>This is my slack app. Loading of users here...</p>
       <button onClick={onLogout}>Logout</button>
       {
