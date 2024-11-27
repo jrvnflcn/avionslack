@@ -10,7 +10,7 @@ function Chat() {
   const getMessages = async () => {
     try {
       const response = await axios.get(`${API_URL}/messages?receiver_id=4&receiver_class=Channel`, { headers: userHeaders });
-      const messages = response.data.body;
+      const messages = response.data.data;
       setMessageList(messages);
     } catch (error) {
       if (error.response.data.errors) {
@@ -28,10 +28,10 @@ function Chat() {
       {
         messageList &&
         messageList.map((chatMessage) => {
-          const { id, body } = chatMessage;
+          const { id, sender:{uid}, body } = chatMessage;
           return (
             <div key={id}>
-              <p>{body}</p>
+              <p>{uid}: {body}</p>
             </div>
           )
         })
