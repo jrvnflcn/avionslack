@@ -11,10 +11,12 @@ function Login(props) {
   const { handleHeaders } = useData();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     try {
       const loginCredentials = { email, password };
       const response = await axios.post(
@@ -30,7 +32,9 @@ function Login(props) {
       }
     } catch (error) {
       if (error.response?.data?.errors) {
-        alert("Invalid credentials");
+        setError("Invalid credentials. Please try again.");
+      } else {
+        setError("An unexpected error occurred. Please try again later.");
       }
     }
   };
@@ -56,7 +60,10 @@ function Login(props) {
           />
         </div>
         <button type="submit">Login</button>
-        <a href="" className="forgot-password">Forgot Password?</a>
+        <a href="" className="forgot-password">
+          Forgot Password?
+        </a>
+        {error && <div className="error-message">{error}</div>}
       </form>
     </div>
   );
