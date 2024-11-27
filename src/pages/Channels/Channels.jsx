@@ -9,7 +9,9 @@ function Channels({ onChannelSelect }) {
 
   const getChannels = async () => {
     try {
-      const response = await axios.get(`${API_URL}/channels`, { headers: userHeaders });
+      const response = await axios.get(`${API_URL}/channels`, {
+        headers: userHeaders,
+      });
       const channels = response.data.data;
       setChannelList(channels);
     } catch (error) {
@@ -37,10 +39,7 @@ function Channels({ onChannelSelect }) {
               onClick={() => onChannelSelect(channel)}
             >
               {name}
-
-              
             </div>
-
           );
         })}
       {!channelList && <div>No channels available</div>}
