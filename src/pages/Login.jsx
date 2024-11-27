@@ -3,6 +3,8 @@ import axios from "axios";
 import { API_URL } from "../constants/Constants";
 import { useNavigate } from "react-router-dom";
 import { useData } from "../context/DataProvider";
+import "./Login.css";
+import flackLogo from "../assets/Slack.png";
 
 function Login(props) {
   const { onLogin } = props;
@@ -14,55 +16,47 @@ function Login(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const loginCredentials = {
-        email,
-        password
-      }
-
-      const response = await axios.post(`${API_URL}/auth/sign_in`, loginCredentials);
+      const loginCredentials = { email, password };
+      const response = await axios.post(
+        `${API_URL}/auth/sign_in`,
+        loginCredentials
+      );
       const { data, headers } = response;
-      if(data && headers) {
-        const accessToken = headers["access-token"];
-        const expiry = headers["expiry"];
-        const client = headers["client"];
-        const uid = headers["uid"];
 
-        console.log(data);
-        console.log(accessToken, expiry, client, uid);
-
+      if (data && headers) {
         handleHeaders(headers);
-
         onLogin();
-        navigate('/dashboard');
+        navigate("/dashboard");
       }
-    } catch(error) {
-      if(error.response.data.errors) {
-        return alert("Invalid credentials");
+    } catch (error) {
+      if (error.response?.data?.errors) {
+        alert("Invalid credentials");
       }
     }
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <h2>Login</h2>
+    <div className="login-container">
+      <img src={flackLogo} className="logo" />
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Email:</label>
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
           />
         </div>
         <div>
-          <label>Password:</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
           />
         </div>
         <button type="submit">Login</button>
+        <a href="" className="forgot-password">Forgot Password?</a>
       </form>
     </div>
   );
