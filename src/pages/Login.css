@@ -9,8 +9,8 @@ body {
   align-items: center;
 }
 
-.logo {
-  height: 80px;
+.login-logo {
+  height: 100px;
   width: auto;
   padding-bottom: 20px;
 }

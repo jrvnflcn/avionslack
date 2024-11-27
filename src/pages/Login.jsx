@@ -41,7 +41,7 @@ function Login(props) {
 
   return (
     <div className="login-container">
-      <img src={flackLogo} className="logo" />
+      <img src={flackLogo} className="login-logo" />
       <form onSubmit={handleSubmit}>
         <div>
           <input
