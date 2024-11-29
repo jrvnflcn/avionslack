@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useData } from "../../../context/DataProvider";
 import axios from "axios";
 import { API_URL } from "../../../constants/Constants";
+import SendMessage from "./SendMessage";
 
 function Chat() {
   const { userHeaders } = useData();
@@ -25,18 +26,22 @@ function Chat() {
 
   return (
     <div>
-      {
-        messageList &&
-        messageList.map((chatMessage) => {
-          const { id, sender:{uid}, body } = chatMessage;
-          return (
-            <div key={id}>
-              <p>{uid}: {body}</p>
-            </div>
-          )
-        })
-      }
-      { !messageList && <div>No messages available</div> }
+      <div>
+        {
+          messageList &&
+          messageList.map((chatMessage) => {
+            const { id, sender:{uid}, body } = chatMessage;
+            return (
+              <div key={id}>
+                <p>{uid}: {body}</p>
+              </div>
+            )
+          })
+        }
+        { !messageList && <div>No messages available</div> }
+      </div>
+
+      <SendMessage />
     </div>
   );
 }
