@@ -5,8 +5,9 @@ function ChannelContent({ selectedChannel }) {
   return (
     <div className="channel-content">
       <h3>
-        {selectedChannel ? selectedChannel.name : "Select a channel"}</h3>
-        <Chat />
+        {selectedChannel ? selectedChannel.name : "Select a channel"}
+      </h3>
+      <Chat />
     </div>
   );
 }

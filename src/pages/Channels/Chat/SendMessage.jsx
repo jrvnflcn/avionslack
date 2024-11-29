@@ -51,7 +51,9 @@ function SendMessage() {
           className="input-style"
           onChange={(event) => setMessage(event.target.value)}
         ></input>
-        <button type="submit">Send Message</button>
+        <button type="submit">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
       </form>
     </div>
   );

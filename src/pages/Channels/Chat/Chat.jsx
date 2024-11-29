@@ -1,3 +1,4 @@
+import "./Chat.css"
 import React, { useState, useEffect } from "react";
 import { useData } from "../../../context/DataProvider";
 import axios from "axios";
@@ -25,7 +26,7 @@ function Chat() {
   })
 
   return (
-    <div>
+    <div className="chat-container">
       <div>
         {
           messageList &&
@@ -40,7 +41,7 @@ function Chat() {
         }
         { !messageList && <div>No messages available</div> }
       </div>
-
+      
       <SendMessage />
     </div>
   );
