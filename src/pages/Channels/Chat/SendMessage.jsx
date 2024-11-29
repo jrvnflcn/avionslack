@@ -25,6 +25,8 @@ function SendMessage() {
 
       if(data.data) {
         navigate('/dashboard');
+        setMessage("");
+        setReceiver("");
       }
 
       if(data.errors) {
@@ -44,12 +46,14 @@ function SendMessage() {
           type="number"
           className="input-style"
           onChange={(event) => setReceiver(event.target.value)}
+          value={receiver}
         ></input>
         <label>Message:</label>
         <input
           type="text"
           className="input-style"
           onChange={(event) => setMessage(event.target.value)}
+          value={message}
         ></input>
         <button type="submit">
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
