@@ -3,8 +3,12 @@ import axios from "axios";
 import { API_URL } from "../constants/Constants";
 import { useNavigate } from "react-router-dom";
 import { useData } from "../context/DataProvider";
+import Modal from "react-modal";
 import "./Login.css";
 import flackLogo from "../assets/Slack.png";
+import SignUp from "./SignUp.jsx"; 
+
+Modal.setAppElement("#root");
 
 function Login(props) {
   const { onLogin } = props;
@@ -12,6 +16,7 @@ function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false); 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -60,11 +65,30 @@ function Login(props) {
           />
         </div>
         <button type="submit">Login</button>
-        <a href="" className="forgot-password">
-          Forgot Password?
-        </a>
+        <div className="login-footer">
+          <a
+            href="#"
+            className="sign-up-link"
+            onClick={() => setIsSignUpOpen(true)} 
+          >
+            Sign Up
+          </a>
+          <a href="#" className="forgot-password">
+            Forgot Password?
+          </a>
+        </div>
         {error && <div className="error-message">{error}</div>}
       </form>
+
+  
+      <Modal
+        isOpen={isSignUpOpen}
+        onRequestClose={() => setIsSignUpOpen(false)}
+        className="modal"
+        overlayClassName="overlay"
+      >
+        <SignUp />
+      </Modal>
     </div>
   );
 }

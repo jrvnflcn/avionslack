@@ -1,21 +1,18 @@
-body {
-  font-family: "Arial", sans-serif;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to right, #6a11cb, #92b3ee);
-  height: 100vh;
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
 }
 
-.login-logo {
-  height: 100px;
-  width: auto;
-  padding-bottom: 20px;
-}
-
-.login-container {
+.modal {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -24,18 +21,18 @@ body {
   text-align: center;
 }
 
-.login-container h2 {
+.modal h2 {
   margin-bottom: 20px;
   font-size: 24px;
   color: #333;
 }
 
-.login-container form {
+.modal form {
   display: flex;
   flex-direction: column;
 }
 
-.login-container input {
+.modal input {
   padding: 10px 0;
   margin-bottom: 20px;
   border: none;
@@ -46,16 +43,16 @@ body {
   color: #333;
 }
 
-.login-container input::placeholder {
+.modal input::placeholder {
   color: #aaa;
 }
 
-.login-container input:focus {
+.modal input:focus {
   border-bottom-color: #6a11cb;
   outline: none;
 }
 
-.login-container button {
+.modal button {
   padding: 10px;
   background-color: #6a11cb;
   border: none;
@@ -66,11 +63,11 @@ body {
   transition: background-color 0.3s;
 }
 
-.login-container button:hover {
+.modal button:hover {
   background-color: #2575fc;
 }
 
-.login-container button:active {
+.modal button:active {
   transform: scale(0.98);
 }
 
@@ -84,33 +81,3 @@ body {
   border-radius: 5px;
 }
 
-.login-footer {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 10px;
-}
-
-.sign-up-link {
-  color: #6a11cb;
-  text-decoration: none;
-}
-
-.sign-up-link:hover {
-  text-decoration: underline;
-}
-
-.forgot-password {
-  color: #6a11cb;
-  text-decoration: none;
-}
-
-.forgot-password:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 480px) {
-  .login-container {
-    width: 90%;
-    padding: 20px;
-  }
-}

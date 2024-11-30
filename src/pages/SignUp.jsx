@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../constants/Constants";
 import { useData } from "../context/DataProvider";
+import "./SignUp.css"
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const { handleHeaders } = useData();
@@ -9,6 +11,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +26,7 @@ function SignUp() {
 
       if (data && headers) {
         handleHeaders(headers);
+        navigate("/login");
       }
     } catch (error) {
       if (error.response?.data?.errors) {
@@ -34,7 +38,8 @@ function SignUp() {
   };
 
   return (
-    <div>
+    <div className="sign-up-container">
+      <h2>Create Account</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <input
