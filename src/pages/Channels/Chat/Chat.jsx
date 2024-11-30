@@ -11,24 +11,29 @@ function Chat({ selectedChannelId }) {
 
   const getMessages = async () => {
     try {
-      const response = await axios.get(`${API_URL}/messages?receiver_id=${selectedChannelId}&receiver_class=Channel`, {
-        headers: userHeaders,
-      });
+      if (!selectedChannelId) return; 
+      const response = await axios.get(
+        `${API_URL}/messages?receiver_id=${selectedChannelId}&receiver_class=Channel`,
+        { headers: userHeaders }
+      );
       const messages = response.data.data;
       setMessageList(messages);
     } catch (error) {
       if (error.response?.data?.errors) {
-        return alert("Cannot get messages");
+        console.error("Cannot get messages:", error.response.data.errors);
+      } else {
+        console.error("Error fetching messages:", error);
       }
     }
   };
 
 
-
   useEffect(() => {
-    if (selectedChannelId) {
+    const intervalId = setInterval(() => {
       getMessages();
-    }
+    }, 500);
+
+    return () => clearInterval(intervalId);
   }, [selectedChannelId]);
 
   return (
@@ -39,14 +44,16 @@ function Chat({ selectedChannelId }) {
             const { id, sender: { uid }, body } = chatMessage;
             return (
               <div key={id}>
-                <p>{uid}: {body}</p>
+                <p>
+                  {uid}: {body}
+                </p>
               </div>
             );
           })}
         {!messageList.length && <div>No messages available</div>}
       </div>
-      
-      <SendMessage selectedChannelId={selectedChannelId} />
+
+      <SendMessage selectedChannelId={selectedChannelId} onMessageSent={getMessages} />
     </div>
   );
 }

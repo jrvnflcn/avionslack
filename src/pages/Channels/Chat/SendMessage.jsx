@@ -3,7 +3,7 @@ import axios from "axios";
 import { API_URL } from "../../../constants/Constants";
 import { useData } from "../../../context/DataProvider";
 
-function SendMessage({ selectedChannelId }) {
+function SendMessage({ selectedChannelId, onMessageSent }) {
   const { userHeaders } = useData();
   const [message, setMessage] = useState("");
 
@@ -22,13 +22,14 @@ function SendMessage({ selectedChannelId }) {
 
       if (data.data) {
         setMessage(""); 
+        if (onMessageSent) onMessageSent(); 
       }
 
       if (data.errors) {
-        console.log(data.errors);
+        console.error(data.errors);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error sending message:", error);
     }
   };
 
