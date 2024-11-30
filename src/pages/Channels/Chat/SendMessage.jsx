@@ -1,3 +1,4 @@
+import "./SendMessage.css";
 import { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../../constants/Constants";
@@ -36,12 +37,12 @@ function SendMessage({ selectedChannelId, onMessageSent }) {
   return (
     <div className="sendMessage">
       <form onSubmit={handleSubmit}>
-        <label>Message:</label>
-        <input
+        <textarea
           type="text"
           className="input-style"
           onChange={(event) => setMessage(event.target.value)}
           value={message}
+          placeholder="Write a message..."
         />
         <button type="submit">
           <i className="fa-solid fa-arrow-right-from-bracket"></i>

@@ -1,5 +1,5 @@
 import "./Chat.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useData } from "../../../context/DataProvider";
 import axios from "axios";
 import { API_URL } from "../../../constants/Constants";
@@ -8,6 +8,7 @@ import SendMessage from "./SendMessage";
 function Chat({ selectedChannelId }) {
   const { userHeaders } = useData();
   const [messageList, setMessageList] = useState([]);
+  const messagesEndRef = useRef(null);
 
   const getMessages = async () => {
     try {
@@ -27,18 +28,18 @@ function Chat({ selectedChannelId }) {
     }
   };
 
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       getMessages();
     }, 500);
 
     return () => clearInterval(intervalId);
-  }, [selectedChannelId]);
+    }, [selectedChannelId]
+  );
 
   return (
     <div className="chat-container">
-      <div>
+      <div className="chat-box">
         {messageList &&
           messageList.map((chatMessage) => {
             const { id, sender: { uid }, body } = chatMessage;

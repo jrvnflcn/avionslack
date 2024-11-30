@@ -1,9 +1,20 @@
 .chat-container {
-  display: flex;
+  display: grid;
+  grid-template-rows: auto 120px;
   height: 100%;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: space-between;
   padding-bottom: 1.5rem;
+}
 
+.chat-box {
+  grid-row: 1;
+  margin: 0.625rem 0.375rem;
+  overflow-y: scroll;
+}
+
+.sendMessage {
+  grid-row: 2;
+}
+
+textarea {
+  resize: none;
 }
