@@ -7,7 +7,11 @@ function ChannelContent({ selectedChannel }) {
       <h3>
         {selectedChannel ? selectedChannel.name : "Select a channel"}
       </h3>
-      <Chat />
+      {selectedChannel ? (
+        <Chat selectedChannelId={selectedChannel.id} />
+      ) : (
+        <p>Please select a channel to see the chat.</p>
+      )}
     </div>
   );
 }
