@@ -45,9 +45,10 @@ function Chat({ selectedChannelId }) {
             const { id, sender: { uid }, body } = chatMessage;
             return (
               <div key={id}>
-                <p>
-                  {uid}: {body}
-                </p>
+                <h5>
+                  {uid}
+                </h5>
+                <p className="textbox">{body}</p>
               </div>
             );
           })}

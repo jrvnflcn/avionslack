@@ -23,6 +23,7 @@ function Dashboard(props) {
       </div>
       <div className="main-layout">
         <div className="sidebar-container">
+          <h4>CHANNELS</h4>
           <Channels onChannelSelect={handleChannelSelect} />
         </div>
         <div className="content-container">

@@ -73,7 +73,7 @@
 
 .channel-tab {
   padding: 10px;
-  margin: 20px 0;
+  margin: 5px 0;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -95,14 +95,18 @@
 
 .add-channel {
   padding: 10px;
+  padding-bottom: 30px;
   margin: 5px 0;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: 0.3s;
 }
 
 .add-channel:hover {
-  background-color: #e0e0e0;
+  color: #e0e0e0;
+  text-decoration-color: #e0e0e0;
 }
 
 .channel-content {
