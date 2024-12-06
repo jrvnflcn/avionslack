@@ -17,24 +17,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
+  background-color: #273d52;
   color: rgb(5, 0, 0);
   padding: 10px 20px;
   font-size: 1.5rem;
   font-weight: bold;
+  border-bottom: 1px solid gray;
 }
 
 .navbar button {
   padding: 8px 16px;
-  background-color: #ff6f61;
-  color: white;
+  background-color: #cd8548;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 0.5s;
 }
 
 .navbar button:hover {
-  background-color: #ff4a36;
+  background-color: #deb088;
 }
 
 .navbar button:active {
@@ -47,10 +48,13 @@
   align-items: center;
 }
 
+.nameLogo span {
+  color: #e0e0e0;
+}
+
 .logo {
   height: 50px;
   width: auto;
-
   padding-right: 5px;
 }
 
@@ -63,7 +67,8 @@
 
 .sidebar-container {
   width: 250px;
-  background-color: #6a11cb;
+  color: #e0e0e0;
+  background-color: #273d52;
   padding: 20px;
   height: 100%;
   overflow-y: auto;
@@ -80,13 +85,13 @@
 }
 
 .channel-tab:hover {
-  background-color: #e0e0e0;
+  background-color: #cd8548;
 }
 
 .content-container {
   flex-grow: 1;
   padding: 20px;
-  background-color: #92b3ee;
+  background-color: #9eb8d0;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   height: 100%;
   width: calc(100vw - 350px);
@@ -101,12 +106,12 @@
   cursor: pointer;
   text-decoration: underline;
   text-decoration-color: transparent;
-  transition: 0.3s;
+  transition: all 0.5s;
 }
 
 .add-channel:hover {
-  color: #e0e0e0;
-  text-decoration-color: #e0e0e0;
+  color: #cd8548;
+  text-decoration-color: #cd8548;
 }
 
 .channel-content {
