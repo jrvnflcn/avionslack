@@ -10,6 +10,7 @@ function Chat({ selectedChannelId }) {
   const [messageList, setMessageList] = useState([]);
   const messagesEndRef = useRef(null);
 
+
   const getMessages = async () => {
     try {
       if (!selectedChannelId) return; 
@@ -17,44 +18,55 @@ function Chat({ selectedChannelId }) {
         `${API_URL}/messages?receiver_id=${selectedChannelId}&receiver_class=Channel`,
         { headers: userHeaders }
       );
-      const messages = response.data.data;
-      setMessageList(messages);
+      const newMessages = response.data.data;
+
+      setMessageList((prevMessages) => {
+        if (JSON.stringify(prevMessages) !== JSON.stringify(newMessages)) {
+          scrollToBottom();
+          return newMessages;
+        }
+        return prevMessages;
+      });
     } catch (error) {
-      if (error.response?.data?.errors) {
-        console.error("Cannot get messages:", error.response.data.errors);
-      } else {
-        console.error("Error fetching messages:", error);
-      }
+      console.error("Error fetching messages:", error.response?.data?.errors || error.message);
     }
   };
 
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+
   useEffect(() => {
+    if (!selectedChannelId) return;
+
+    getMessages(); 
     const intervalId = setInterval(() => {
       getMessages();
-    }, 500);
+    }, 5000); 
 
     return () => clearInterval(intervalId);
-    }, [selectedChannelId]
-  );
+  }, [selectedChannelId]);
 
   return (
     <div className="chat-container">
       <div className="chat-box">
-        {messageList &&
+        {messageList.length > 0 ? (
           messageList.map((chatMessage) => {
             const { id, sender: { uid }, body } = chatMessage;
             return (
               <div key={id}>
-                <h5>
-                  {uid}
-                </h5>
+                <h5>{uid}</h5>
                 <p className="textbox">{body}</p>
               </div>
             );
-          })}
-        {!messageList.length && <div>No messages available</div>}
+          })
+        ) : (
+          <div>No messages available</div>
+        )}
+        <div ref={messagesEndRef} /> 
       </div>
-
       <SendMessage selectedChannelId={selectedChannelId} onMessageSent={getMessages} />
     </div>
   );

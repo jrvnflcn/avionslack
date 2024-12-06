@@ -45,9 +45,19 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at anytime. This command will remove the single build dependency from your project. 
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpac, Babel ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scri
+
+yOU DON'T HAVE TO EVER USE `EJECT` THE CURATED FEATURE SET IS SUITABLE FOR SMALL AND MIDDLE DEPLOYMENTS, AND YOU SHOULDN'T FEEL
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouln't feel obligated to use this feature. However, we understand that this tool wouldn't be useful if you couln't customize it when you are ready for it. All of the commands 
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
 ## Learn More
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deploy
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
