@@ -115,5 +115,24 @@
 }
 
 .channel-content {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+}
+
+.channel-header {
+  flex-shrink: 0; 
+  background-color: #f1f1f1; 
+  padding: 10px 15px;
+  border-bottom: 1px solid #ccc; 
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.channel-chat {
+  flex-grow: 1; 
+  overflow-y: auto; 
+  padding: 10px;
+  background-color: #ffffff; 
+  border-radius: 5px;
 }
