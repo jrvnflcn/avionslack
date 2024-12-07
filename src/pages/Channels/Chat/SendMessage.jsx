@@ -10,6 +10,7 @@ function SendMessage({ selectedChannelId, onMessageSent }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!message.trim()) return; 
     try {
       const messageInfo = {
         receiver_id: selectedChannelId,
@@ -17,7 +18,9 @@ function SendMessage({ selectedChannelId, onMessageSent }) {
         body: message,
       };
 
-      const response = await axios.post(`${API_URL}/messages`, messageInfo, { headers: userHeaders });
+      const response = await axios.post(`${API_URL}/messages`, messageInfo, {
+        headers: userHeaders,
+      });
 
       const { data } = response;
 
@@ -34,6 +37,13 @@ function SendMessage({ selectedChannelId, onMessageSent }) {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e); 
+    }
+  };
+
   return (
     <div className="sendMessage">
       <form onSubmit={handleSubmit}>
@@ -41,6 +51,7 @@ function SendMessage({ selectedChannelId, onMessageSent }) {
           type="text"
           className="input-style"
           onChange={(event) => setMessage(event.target.value)}
+          onKeyDown={handleKeyPress} 
           value={message}
           placeholder="Write a message..."
         />
