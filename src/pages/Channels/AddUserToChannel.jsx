@@ -5,24 +5,28 @@ import axios from "axios";
 import { API_URL } from "../../constants/Constants";
 import { useData } from "../../context/DataProvider";
 
-function AddUserToChannel() {
+function AddUserToChannel({ selectedChannel }) {
   const { userHeaders } = useData();
+  const [newMember, setNewMember] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
+      const memberInfo = {
+        id: Number(selectedChannel.id),
+        member_id: Number(newMember)
+      }
+
       const response = await axios.post(
-        `${API_URL}/channel/add_member`,
-        userHeaders
+        `${API_URL}/channel/add_member`, memberInfo, 
+        { headers: userHeaders }
       );
 
-      // CONTINUE HERE
+      const { data } = response;
 
-      const { data, headers } = response;
-
-      if (data && headers) {
-        handleHeaders(headers);
+      if (data.data) {
+        return alert("Successfully added member!");
       }
     } catch (error) {
       if (error.response?.data?.errors) {
@@ -34,34 +38,16 @@ function AddUserToChannel() {
   };
 
   return ( 
-    <div className="sign-up-container">
-      <h2>Create Account</h2>
+    <div className="channel-add-member">
       <form onSubmit={handleSubmit}>
         <div>
           <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
+            type="number"
+            onChange={(e) => setNewMember(e.target.value)}
+            placeholder="Member ID"
           />
         </div>
-        <div>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-          />
-        </div>
-        <div>
-          <input
-            type="password"
-            value={password_confirmation}
-            onChange={(e) => setPasswordConfirmation(e.target.value)}
-            placeholder="Confirm Password"
-          />
-        </div>
-        <button type="submit">Create Account</button>
+        <button type="submit">Add Member</button>
         {error && <div className="error-message">{error}</div>}
       </form>
     </div>

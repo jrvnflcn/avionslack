@@ -7,26 +7,22 @@ function ViewChannelMembers({ selectedChannelId }) {
   const { userHeaders } = useData();
   const [memberList, setMemberList] = useState([]);
 
-  const getChannelDetails = async () => {
+  const getChannelMembers = async () => {
     try {
-      if (!selectedChannelId) return; 
       const response = await axios.get(
-        `${API_URL}/channels/${selectedChannelId}`,
-        { headers: userHeaders }
-      );
-      const channelMembers = response.data.data.channel_members;
+      `${API_URL}/channels/${selectedChannelId}`, { headers: userHeaders });
+      const channelUserDetails = response.data.data.channel_members;
 
-      // CONTINUE HERE
+      const usersResponse = await axios.get(
+        `${API_URL}/users`, { headers: userHeaders });
+      const allUsers = usersResponse.data.data;
 
-      setMessageList((prevMessages) => {
-        if (JSON.stringify(prevMessages) !== JSON.stringify(newMessages)) {
-          scrollToBottom();
-          return newMessages;
-        }
-        return prevMessages;
+      const channelUserIds = channelUserDetails.map((individual) => {
+        const { user_id } = individual;
       });
+
     } catch (error) {
-      console.error("Error fetching messages:", error.response?.data?.errors || error.message);
+      console.error("Error fetching channel members:", error.response?.data?.errors || error.message);
     }
   };
 
