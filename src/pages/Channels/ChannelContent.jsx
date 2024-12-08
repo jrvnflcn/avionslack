@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Chat from "./Chat/Chat";
+import ViewChannelMembers from "./ViewChannelMembers";
 
 function ChannelContent({ selectedChannel }) {
   const [lastChannelName, setLastChannelName] = useState(null);
@@ -14,6 +15,7 @@ function ChannelContent({ selectedChannel }) {
     <div className="channel-content">
       <div className="channel-header">
         <h3>{selectedChannel ? selectedChannel.name : lastChannelName || "Select a channel"}</h3>
+        <ViewChannelMembers selectedChannelId={selectedChannel.id}/>
       </div>
       <div className="channel-chat">
         {selectedChannel ? (

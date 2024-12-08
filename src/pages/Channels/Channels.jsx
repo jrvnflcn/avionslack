@@ -39,37 +39,37 @@ function Channels({ onChannelSelect }) {
   
   {/* start of direct messages here */}
 
-  const getDirectMessages = async () => {
-    setLoading(true); 
-    setError(null); 
+  // const getDirectMessages = async () => {
+  //   setLoading(true); 
+  //   setError(null); 
 
-    const userListResponse = await axios.get(`${API_URL}/users`, { headers: userHeaders });
-    const userList = userListResponse.data.data;
-    const activeUserList = userList.map();
+  //   const userListResponse = await axios.get(`${API_URL}/users`, { headers: userHeaders });
+  //   const userList = userListResponse.data.data;
+  //   const activeUserList = userList.map();
 
-    try {
-      const response = await axios.get(
-        `${API_URL}/messages?receiver_id=${activeUserList.map(id)}&receiver_class=User`,
-        { headers: userHeaders }
-      );
-      if(response.data.length !== 0) {
-        const directMessages = response.data?.data || [];
-        setDirectMessageList(directMessages);
-      }
-    } catch (error) {
-      setError("Cannot get messages. Please try again later.");
-    } finally {
-      setLoading(false); 
-    }
-  };
+  //   try {
+  //     const response = await axios.get(
+  //       `${API_URL}/messages?receiver_id=${activeUserList.map()}&receiver_class=User`,
+  //       { headers: userHeaders }
+  //     );
+  //     if(response.data.length !== 0) {
+  //       const directMessages = response.data?.data || [];
+  //       setDirectMessageList(directMessages);
+  //     }
+  //   } catch (error) {
+  //     setError("Cannot get messages. Please try again later.");
+  //   } finally {
+  //     setLoading(false); 
+  //   }
+  // };
 
-  useEffect(() => {
-    getDirectMessages();
-  }, []);
+  // useEffect(() => {
+  //   getDirectMessages();
+  // }, []);
 
-  const handleNewMessage = (newMessage) => {
-    setChannelList((prevMessage) => [...prevMessage, newMessage]);
-  };
+  // const handleNewMessage = (newMessage) => {
+  //   setChannelList((prevMessage) => [...prevMessage, newMessage]);
+  // };
 
   {/* end of direct messages here */}
 
@@ -105,7 +105,7 @@ function Channels({ onChannelSelect }) {
       />
 
 
-      {loading ? (
+      {/* {loading ? (
         <div>Loading messages...</div> 
       ) : error ? (
         <div className="error-message">{error}</div> 
@@ -125,7 +125,7 @@ function Channels({ onChannelSelect }) {
 
       <a className="new-message" onClick={() => setModalIsOpen(true)}>
         + New Message
-      </a>
+      </a> */}
 
       {/* <NewMessageModal
         isOpen={modalIsOpen2}

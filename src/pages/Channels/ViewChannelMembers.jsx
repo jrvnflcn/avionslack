@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { API_URL } from "../../constants/Constants";
 import { useData } from "../../context/DataProvider";
 import axios from "axios";
+import { useEffect } from "react";
 
 function ViewChannelMembers({ selectedChannelId }) {
   const { userHeaders } = useData();
@@ -19,16 +20,35 @@ function ViewChannelMembers({ selectedChannelId }) {
 
       const channelUserIds = channelUserDetails.map((individual) => {
         const { user_id } = individual;
+        return allUsers.find((user) => user.id == user_id);
       });
+
+      setMemberList(channelUserIds);
 
     } catch (error) {
       console.error("Error fetching channel members:", error.response?.data?.errors || error.message);
     }
   };
 
+  useEffect(() => {
+    if(memberList.length === 0) {
+      getChannelMembers();
+    }
+  })
+
   return ( 
     <div className="user-list-modal">
-
+      {
+        memberList &&
+        memberList.map((individual) => {
+          const { id, uid } = individual;
+          return (
+            <div key={id}>
+              <p>{uid}</p>
+            </div>
+          )
+        })
+      }
     </div>
    );
 }
