@@ -5,16 +5,15 @@ import axios from "axios";
 import { API_URL } from "../../constants/Constants";
 import { useData } from "../../context/DataProvider";
 
-function AddUserToChannel({ selectedChannel }) {
+function AddUserToChannel({ selectedChannelId }) {
   const { userHeaders } = useData();
   const [newMember, setNewMember] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     try {
       const memberInfo = {
-        id: Number(selectedChannel.id),
+        id: Number(selectedChannelId),
         member_id: Number(newMember)
       }
 
@@ -29,12 +28,11 @@ function AddUserToChannel({ selectedChannel }) {
         return alert("Successfully added member!");
       }
     } catch (error) {
-      if (error.response?.data?.errors) {
-        setError("Invalid credentials. Please try again.");
-      } else {
-        setError("An unexpected error occurred. Please try again later.");
-      }
-    }
+      console.error(
+        "Error fetching channel members:",
+        error.response?.data?.errors || error.message
+      );
+    };
   };
 
   return ( 
@@ -48,10 +46,10 @@ function AddUserToChannel({ selectedChannel }) {
           />
         </div>
         <button type="submit">Add Member</button>
-        {error && <div className="error-message">{error}</div>}
+        {/* {<div className="error-message">Error</div>} */}
       </form>
     </div>
   );
-}
+};
  
 export default AddUserToChannel;

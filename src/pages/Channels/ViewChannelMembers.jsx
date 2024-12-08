@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../constants/Constants";
 import { useData } from "../../context/DataProvider";
+import AddUserToChannel from "./AddUserToChannel";
 
 function ViewChannelMembers({ selectedChannelId, onClose }) {
   const { userHeaders } = useData();
@@ -56,6 +57,7 @@ function ViewChannelMembers({ selectedChannelId, onClose }) {
         ) : (
           <p>No members found for this channel.</p>
         )}
+        <AddUserToChannel selectedChannelId={selectedChannelId}/>
       </div>
     </div>
   );

@@ -41,7 +41,7 @@ function SignUp() {
         setEmail("");
         setPassword("");
         setPasswordConfirmation("");
-        navigate("/login"); 
+        navigate("/"); 
       }
     } catch (error) {
       if (error.response?.data?.errors) {
