@@ -14,7 +14,7 @@ function ViewChannelMembers({ selectedChannelId }) {
       const channelUserDetails = response.data.data.channel_members;
 
       const usersResponse = await axios.get(
-        `${API_URL}/users`, { headers: userHeaders });
+      `${API_URL}/users`, { headers: userHeaders });
       const allUsers = usersResponse.data.data;
 
       const channelUserIds = channelUserDetails.map((individual) => {
