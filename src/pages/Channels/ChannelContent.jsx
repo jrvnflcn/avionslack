@@ -17,7 +17,7 @@ function ChannelContent({ selectedChannel }) {
       <div className="channel-header">
         <h3>{selectedChannel ? selectedChannel.name : lastChannelName || "Select a channel"}</h3>
         {selectedChannel && (
-          <button onClick={() => setShowModal(true)}>View Members</button>
+          <button onClick={() => setShowModal(true)}><i className="fa-regular fa-user"></i></button>
         )}
       </div>
       <div className="channel-chat">

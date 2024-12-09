@@ -125,12 +125,20 @@
 }
 
 .channel-header {
+  display: flex;
+  justify-content: space-between;
   flex-shrink: 0; 
   background-color: #f1f1f1; 
   padding: 10px 15px;
   border-bottom: 1px solid #ccc; 
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.channel-header button {
+  background-color: none;
+  border: none;
+  scale: 1.5;
 }
 
 .channel-chat {
