@@ -37,12 +37,22 @@ function AddChannelModal({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!channelName || selectedMembers.length === 0) {
+      alert("Please provide a channel name and select at least one member.");
+      return;
+    }
+
+    console.log("Selected Members: ", selectedMembers);
+    const userIds = selectedMembers.map((user) => user.value);
+    console.log("User IDs being sent: ", userIds);
+
     try {
       const response = await axios.post(
         `${API_URL}/channels`,
         {
           name: channelName,
-          members: selectedMembers.map((user) => user.value),
+          user_ids: userIds,
         },
         {
           headers: userHeaders,
@@ -52,6 +62,13 @@ function AddChannelModal({
       onRequestClose();
     } catch (error) {
       alert("Error creating channel");
+      console.error("Error creating channel:", error);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
     }
   };
 
@@ -63,7 +80,7 @@ function AddChannelModal({
       overlayClassName="overlay"
     >
       <h2>Add a New Channel</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
         <div>
           <label htmlFor="channel-name">Channel Name:</label>
           <input
@@ -71,6 +88,7 @@ function AddChannelModal({
             id="channel-name"
             value={channelName}
             onChange={(e) => setChannelName(e.target.value)}
+            maxLength="15"
             required
           />
         </div>
@@ -81,7 +99,7 @@ function AddChannelModal({
             id="members"
             options={users.map((user) => ({
               value: user.id,
-              label: user.name,
+              label: user.email,
             }))}
             isMulti
             onChange={setSelectedMembers}

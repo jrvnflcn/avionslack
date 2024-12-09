@@ -1,7 +1,17 @@
+.sendMessage {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
 form {
   display: grid;
   grid-template-columns: 95% 5%;
-  height: 100%;
+  width: 100%;
+  gap: 0.5rem;
 }
 
 textarea {
@@ -9,8 +19,10 @@ textarea {
   border: none;
   background-color: #ffffff90;
   padding: 0.625rem;
-  height: 100%;
-  border-radius: 10px 0 0 10px;
+  border-radius: 10px;
+  width: 100%;
+  max-height: 3rem;
+  resize: none;
 }
 
 button {
@@ -21,4 +33,16 @@ button {
   cursor: pointer;
   height: 100%;
   border-radius: 0 10px 10px 0;
+}
+
+button i {
+  font-size: 1.2rem;
+}
+
+.input-style {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background-color: #e0e0e0;
+  padding: 10px;
 }

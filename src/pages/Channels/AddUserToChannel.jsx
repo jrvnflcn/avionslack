@@ -14,11 +14,12 @@ function AddUserToChannel({ selectedChannelId }) {
     try {
       const memberInfo = {
         id: Number(selectedChannelId),
-        member_id: Number(newMember)
-      }
+        member_id: Number(newMember),
+      };
 
       const response = await axios.post(
-        `${API_URL}/channel/add_member`, memberInfo, 
+        `${API_URL}/channel/add_member`,
+        memberInfo,
         { headers: userHeaders }
       );
 
@@ -32,10 +33,10 @@ function AddUserToChannel({ selectedChannelId }) {
         "Error fetching channel members:",
         error.response?.data?.errors || error.message
       );
-    };
+    }
   };
 
-  return ( 
+  return (
     <div className="channel-add-member">
       <form onSubmit={handleSubmit}>
         <div>
@@ -46,10 +47,9 @@ function AddUserToChannel({ selectedChannelId }) {
           />
         </div>
         <button type="submit">Add Member</button>
-        {/* {<div className="error-message">Error</div>} */}
       </form>
     </div>
   );
-};
- 
+}
+
 export default AddUserToChannel;

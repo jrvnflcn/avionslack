@@ -1,46 +1,44 @@
-import "./SendMessage.css";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useData } from "../../../context/DataProvider";
 import axios from "axios";
 import { API_URL } from "../../../constants/Constants";
-import { useData } from "../../../context/DataProvider";
+import "./SendMessage.css";
 
-function SendMessage({ selectedChannelId, onMessageSent }) {
+function SendMessageDM({ receiver, onMessageSent }) {
   const { userHeaders } = useData();
   const [message, setMessage] = useState("");
+  const [error, setError] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const sendMessage = async () => {
     if (!message.trim()) return;
+
     try {
-      const messageInfo = {
-        receiver_id: selectedChannelId,
-        receiver_class: "Channel",
-        body: message,
-      };
+      await axios.post(
+        `${API_URL}/messages`,
+        {
+          receiver_id: receiver.id,
+          receiver_class: "User",
+          body: message,
+        },
+        { headers: userHeaders }
+      );
 
-      const response = await axios.post(`${API_URL}/messages`, messageInfo, {
-        headers: userHeaders,
-      });
-
-      const { data } = response;
-
-      if (data.data) {
-        setMessage("");
-        if (onMessageSent) onMessageSent();
-      }
-
-      if (data.errors) {
-        console.error(data.errors);
-      }
+      setMessage("");
+      onMessageSent();
     } catch (error) {
-      console.error("Error sending message:", error);
+      setError("Failed to send message. Please try again.");
     }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendMessage();
   };
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleSubmit(e);
+      sendMessage();
     }
   };
 
@@ -63,4 +61,4 @@ function SendMessage({ selectedChannelId, onMessageSent }) {
   );
 }
 
-export default SendMessage;
+export default SendMessageDM;

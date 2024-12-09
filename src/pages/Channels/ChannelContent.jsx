@@ -15,9 +15,15 @@ function ChannelContent({ selectedChannel }) {
   return (
     <div className="channel-content">
       <div className="channel-header">
-        <h3>{selectedChannel ? selectedChannel.name : lastChannelName || "Select a channel"}</h3>
+        <h3>
+          {selectedChannel
+            ? selectedChannel.name
+            : lastChannelName || "Select a channel"}
+        </h3>
         {selectedChannel && (
-          <button onClick={() => setShowModal(true)}><i className="fa-regular fa-user"></i></button>
+          <button onClick={() => setShowModal(true)}>
+            <i className="fa-regular fa-user"></i>
+          </button>
         )}
       </div>
       <div className="channel-chat">

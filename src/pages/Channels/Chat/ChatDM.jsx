@@ -1,34 +1,33 @@
-import "./Chat.css";
 import React, { useState, useEffect, useRef } from "react";
 import { useData } from "../../../context/DataProvider";
 import axios from "axios";
 import { API_URL } from "../../../constants/Constants";
-import SendMessage from "./SendMessage";
+import SendMessageDM from "./SendMessageDM";
+import "./Chat.css";
 
-function Chat({ selectedChannelId }) {
+function ChatDM({ selectedUser }) {
   const { userHeaders } = useData();
-  const [messageList, setMessageList] = useState([]);
+  const [messages, setMessages] = useState([]);
   const messagesEndRef = useRef(null);
 
   const getMessages = async () => {
+    if (!selectedUser) return;
+
     try {
-      if (!selectedChannelId) return;
       const response = await axios.get(
-        `${API_URL}/messages?receiver_id=${selectedChannelId}&receiver_class=Channel`,
+        `${API_URL}/messages?receiver_id=${selectedUser.id}&receiver_class=User`,
         { headers: userHeaders }
       );
-      const newMessages = response.data.data;
-      setMessageList((prevMessages) => {
-        if (JSON.stringify(prevMessages) !== JSON.stringify(newMessages)) {
-          return newMessages;
-        }
-        return prevMessages;
-      });
-    } catch (error) {
-      console.error(
-        "Error fetching messages:",
-        error.response?.data?.errors || error.message
+
+      const allMessages = response.data.data || [];
+
+      allMessages.sort(
+        (a, b) => new Date(a.created_at) - new Date(b.created_at)
       );
+
+      setMessages(allMessages);
+    } catch (error) {
+      console.error("Error fetching messages:", error.message);
     }
   };
 
@@ -37,30 +36,28 @@ function Chat({ selectedChannelId }) {
   };
 
   useEffect(() => {
-    if (!selectedChannelId) return;
-
     getMessages();
     const intervalId = setInterval(() => {
       getMessages();
     }, 5000);
 
     return () => clearInterval(intervalId);
-  }, [selectedChannelId]);
+  }, [selectedUser]);
 
   useEffect(() => {
     scrollToBottom();
-  }, [messageList]);
+  }, [messages]);
 
   return (
     <div className="chat-container">
       <div className="chat-box">
-        {messageList.length > 0 ? (
-          messageList.map((chatMessage) => {
+        {messages.length > 0 ? (
+          messages.map((message) => {
             const {
               id,
               sender: { uid },
               body,
-            } = chatMessage;
+            } = message;
             return (
               <div
                 key={id}
@@ -68,22 +65,18 @@ function Chat({ selectedChannelId }) {
                   uid === userHeaders.uid ? "sent" : "received"
                 }`}
               >
-                <h5 className="sender-name">{uid}</h5>
                 <p className="textbox">{body}</p>
               </div>
             );
           })
         ) : (
-          <div>No messages available</div>
+          <div>No messages yet. Start the conversation!</div>
         )}
         <div ref={messagesEndRef} />
       </div>
-      <SendMessage
-        selectedChannelId={selectedChannelId}
-        onMessageSent={getMessages}
-      />
+      <SendMessageDM receiver={selectedUser} onMessageSent={getMessages} />
     </div>
   );
 }
 
-export default Chat;
+export default ChatDM;

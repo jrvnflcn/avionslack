@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useData } from "../../context/DataProvider";
 import axios from "axios";
 import { API_URL } from "../../constants/Constants";
-import AddChannelModal from "./AddChannelModal";
+import { useData } from "../../context/DataProvider";
+import DirectMessageModal from "./DirectMessageModal";
 
 function DirectMessages({ onUserSelect }) {
   const { userHeaders } = useData();
@@ -19,39 +19,44 @@ function DirectMessages({ onUserSelect }) {
       const usersResponse = await axios.get(`${API_URL}/users`, {
         headers: userHeaders,
       });
-      const allUsers = usersResponse.data.data; 
-      const loggedInUserUid = userHeaders.uid; 
-      const involvedUsers = new Set(); 
+      const allUsers = usersResponse.data.data;
+      const loggedInUserUid = userHeaders.uid;
+      const involvedUsers = new Set();
 
       for (const user of allUsers) {
         if (user.uid === loggedInUserUid) continue;
 
-        
         const response = await axios.get(
           `${API_URL}/messages?receiver_id=${user.id}&receiver_class=User`,
           { headers: userHeaders }
         );
 
         if (response.data && response.data.data.length !== 0) {
-          response.data.data.forEach((message) => {
-            if (
-              message.sender.uid === loggedInUserUid || 
+          const hasConversation = response.data.data.some(
+            (message) =>
+              message.sender.uid === loggedInUserUid ||
               message.receiver.uid === loggedInUserUid
-            ) {
-              involvedUsers.add(user.uid); 
-            }
-          });
+          );
+          if (hasConversation) {
+            involvedUsers.add(user.uid);
+          }
         }
       }
 
-      const filteredUsers = allUsers.filter((user) => involvedUsers.has(user.uid));
+      const filteredUsers = allUsers.filter((user) =>
+        involvedUsers.has(user.uid)
+      );
 
-      setDirectMessageList(filteredUsers); 
+      setDirectMessageList(filteredUsers);
     } catch (error) {
       setError("Cannot get messages. Please try again later.");
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleMessageSent = () => {
+    getUserDM();
   };
 
   useEffect(() => {
@@ -71,20 +76,26 @@ function DirectMessages({ onUserSelect }) {
       ) : (
         directMessageList.map((user) => (
           <div
-            key={user.uid} 
+            key={user.uid}
             className="channel-tab"
             onClick={() => onUserSelect(user)}
           >
-            {user.email || "Unknown User"} 
+            {user.email || "Unknown User"}
           </div>
         ))
       )}
 
-      <button className="new-message" onClick={() => setModalIsOpen(true)}>
+      <a className="add-channel" onClick={() => setModalIsOpen(true)}>
         + New Message
-      </button>
+      </a>
 
-      {modalIsOpen && <AddChannelModal onClose={() => setModalIsOpen(false)} />}
+      {modalIsOpen && (
+        <DirectMessageModal
+          isOpen={modalIsOpen}
+          onClose={() => setModalIsOpen(false)}
+          onMessageSent={handleMessageSent}
+        />
+      )}
     </div>
   );
 }

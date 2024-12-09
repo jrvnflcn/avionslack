@@ -8,22 +8,23 @@ function Channels({ onChannelSelect }) {
   const { userHeaders } = useData();
   const [channelList, setChannelList] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const getChannels = async () => {
-    setLoading(true); 
-    setError(null); 
+    setLoading(true);
+    setError(null);
     try {
       const response = await axios.get(`${API_URL}/channels`, {
         headers: userHeaders,
       });
       const channels = response.data?.data || [];
       setChannelList(channels);
+      console.log("Fetched channels:", channels);
     } catch (error) {
       setError("Cannot get channels. Please try again later.");
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -31,18 +32,22 @@ function Channels({ onChannelSelect }) {
     getChannels();
   }, []);
 
-  const handleChannelAdded = (newChannel) => {
+  const handleChannelAdded = async (newChannel) => {
+    console.log("New channel added:", newChannel);
+
     setChannelList((prevChannels) => [...prevChannels, newChannel]);
+
+    await getChannels();
   };
 
   return (
     <div className="sidebar">
       {loading ? (
-        <div>Loading channels...</div> 
+        <div>Loading channels...</div>
       ) : error ? (
-        <div className="error-message">{error}</div> 
+        <div className="error-message">{error}</div>
       ) : channelList.length === 0 ? (
-        <div>No channels available. Add one to get started!</div> 
+        <div>No channels available. Add one to get started!</div>
       ) : (
         channelList.map((channel) => (
           <div
