@@ -16,37 +16,49 @@ function DirectMessages({ onUserSelect }) {
     setError(null);
 
     try {
-      // get all users
       const usersResponse = await axios.get(`${API_URL}/users`, {
         headers: userHeaders,
       });
-      const allUsers = usersResponse.data.data.id;
+      const allUsers = usersResponse.data.data; 
+      const loggedInUserUid = userHeaders.uid; 
+      const involvedUsers = new Set(); 
 
-      // get each user that has DMed you
-      for (const id of allUsers) {
+      for (const user of allUsers) {
+        if (user.uid === loggedInUserUid) continue;
+
+        
         const response = await axios.get(
-          `${API_URL}/messages?receiver_id=${id}&receiver_class=User`,
+          `${API_URL}/messages?receiver_id=${user.id}&receiver_class=User`,
           { headers: userHeaders }
         );
-        if (response.data.length !== 0) {
-          const directMessages = response.data?.data || [];
-          setDirectMessageList(directMessages);
+
+        if (response.data && response.data.data.length !== 0) {
+          response.data.data.forEach((message) => {
+            if (
+              message.sender.uid === loggedInUserUid || 
+              message.receiver.uid === loggedInUserUid
+            ) {
+              involvedUsers.add(user.uid); 
+            }
+          });
         }
       }
+
+      const filteredUsers = allUsers.filter((user) => involvedUsers.has(user.uid));
+
+      setDirectMessageList(filteredUsers); 
     } catch (error) {
-      setError("Cannot get users. Please try again later.");
+      setError("Cannot get messages. Please try again later.");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    getUserDM();
-  }, []);
-
-  // const handleNewMessage = (newMessage) => {
-  //   setChannelList((prevMessage) => [...prevMessage, newMessage]);
-  // };
+    if (userHeaders.uid) {
+      getUserDM();
+    }
+  }, [userHeaders]);
 
   return (
     <div className="direct-messages">
@@ -59,25 +71,20 @@ function DirectMessages({ onUserSelect }) {
       ) : (
         directMessageList.map((user) => (
           <div
-            key={user.id}
+            key={user.uid} 
             className="channel-tab"
             onClick={() => onUserSelect(user)}
           >
-            {user.sender.uid}
+            {user.email || "Unknown User"} 
           </div>
         ))
       )}
 
-      <a className="new-message" onClick={() => setModalIsOpen(true)}>
+      <button className="new-message" onClick={() => setModalIsOpen(true)}>
         + New Message
-      </a>
+      </button>
 
-      {/* <NewMessageModal
-        isOpen={modalIsOpen2}
-        onRequestClose={() => setModalIsOpen2(false)}
-        userHeaders={userHeaders}
-        onNewMessage={handleNewMessage}
-      /> */}
+      {modalIsOpen && <AddChannelModal onClose={() => setModalIsOpen(false)} />}
     </div>
   );
 }
