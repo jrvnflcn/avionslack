@@ -76,6 +76,10 @@
   top: 60px;
 }
 
+.sidebar {
+  margin-bottom: 30px;
+}
+
 .channel-tab {
   padding: 10px;
   margin: 5px 0;
@@ -98,9 +102,9 @@
   overflow-y: auto;
 }
 
-.add-channel {
+.sidebar-container a {
+  display: block;
   padding: 10px;
-  padding-bottom: 30px;
   margin: 5px 0;
   border-radius: 5px;
   cursor: pointer;
@@ -109,7 +113,7 @@
   transition: all 0.5s;
 }
 
-.add-channel:hover {
+.sidebar-container a:hover {
   color: #cd8548;
   text-decoration-color: #cd8548;
 }
