@@ -92,6 +92,7 @@
 
 .sub-container {
   grid-row: 1;
+  min-height: 300px;
   max-height: 100%;
   overflow-y: scroll;
 }
@@ -239,4 +240,8 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+.no-chat {
+  margin-top: 10px;
 }

@@ -60,6 +60,7 @@ function Chat({ selectedChannelId }) {
               id,
               sender: { uid },
               body,
+              created_at
             } = chatMessage;
             return (
               <div
@@ -70,6 +71,7 @@ function Chat({ selectedChannelId }) {
               >
                 <h5 className="sender-name">{uid}</h5>
                 <p className="textbox">{body}</p>
+                <p className="timestamp">{new Date(created_at).toLocaleTimeString("en-US", {hour: "2-digit", minute: "2-digit"})}</p>
               </div>
             );
           })

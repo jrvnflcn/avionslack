@@ -69,11 +69,11 @@ function DirectMessages({ onUserSelect }) {
     <div className="sidebar">
       <div className="sub-container">
         {loading ? (
-          <div>Loading messages...</div>
+          <div className="no-chat">Loading messages...</div>
         ) : error ? (
           <div className="error-message">{error}</div>
         ) : directMessageList.length === 0 ? (
-          <div>No messages available. Send one to get started!</div>
+          <div className="no-chat">No messages available. Send one to get started!</div>
         ) : (
           directMessageList.map((user) => (
             <div

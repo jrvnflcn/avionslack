@@ -57,6 +57,7 @@ function ChatDM({ selectedUser }) {
               id,
               sender: { uid },
               body,
+              created_at
             } = message;
             return (
               <div
@@ -66,6 +67,7 @@ function ChatDM({ selectedUser }) {
                 }`}
               >
                 <p className="textbox">{body}</p>
+                <p className="timestamp">{new Date(created_at).toLocaleTimeString("en-US", {hour: "2-digit", minute: "2-digit"})}</p>
               </div>
             );
           })

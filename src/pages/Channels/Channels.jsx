@@ -44,11 +44,11 @@ function Channels({ onChannelSelect }) {
     <div className="sidebar">
       <div className="sub-container">
         {loading ? (
-          <div>Loading channels...</div>
+          <div className="no-chat">Loading channels...</div>
         ) : error ? (
           <div className="error-message">{error}</div>
         ) : channelList.length === 0 ? (
-          <div>No channels available. Add one to get started!</div>
+          <div className="no-chat">No channels available. Add one to get started!</div>
         ) : (
           channelList.map((channel) => (
             <div

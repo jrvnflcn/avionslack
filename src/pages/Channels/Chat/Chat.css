@@ -8,7 +8,6 @@
 .chat-box {
   grid-row: 1;
   overflow-y: auto;
-  /* padding-bottom: 3rem; */
 }
 
 .message {
@@ -34,7 +33,6 @@
   padding: 10px;
   width: fit-content;
   max-width: 30rem;
-  margin-bottom: 8px;
 }
 
 .message.sent .textbox {
@@ -45,6 +43,22 @@
 .message.received .textbox {
   background-color: #1b2734f3;
   border-radius: 20px 20px 20px 5px;
+}
+
+.timestamp {
+  color: #e0e0e0;
+  margin-top: 2px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.message.sent .timestamp {
+  margin-right: 5px;
+}
+
+.message.received .timestamp {
+  margin-left: 5px;
 }
 
 .sender-name {
