@@ -44,7 +44,7 @@ function SendDirectMessage({ selectedUserId, onMessageSent }) {
   };
 
   return (
-    <div className="sendMessage">
+    <div className="channel-send-directmessage">
       <form onSubmit={handleSubmit}>
         <textarea
           type="text"

@@ -66,26 +66,28 @@ function DirectMessages({ onUserSelect }) {
   }, [userHeaders]);
 
   return (
-    <div className="direct-messages">
-      {loading ? (
-        <div>Loading messages...</div>
-      ) : error ? (
-        <div className="error-message">{error}</div>
-      ) : directMessageList.length === 0 ? (
-        <div>No messages available. Send one to get started!</div>
-      ) : (
-        directMessageList.map((user) => (
-          <div
-            key={user.uid}
-            className="channel-tab"
-            onClick={() => onUserSelect(user)}
-          >
-            {user.email || "Unknown User"}
-          </div>
-        ))
-      )}
+    <div className="sidebar">
+      <div className="sub-container">
+        {loading ? (
+          <div>Loading messages...</div>
+        ) : error ? (
+          <div className="error-message">{error}</div>
+        ) : directMessageList.length === 0 ? (
+          <div>No messages available. Send one to get started!</div>
+        ) : (
+          directMessageList.map((user) => (
+            <div
+              key={user.uid}
+              className="channel-tab"
+              onClick={() => onUserSelect(user)}
+            >
+              {user.email || "Unknown User"}
+            </div>
+          ))
+        )}
+      </div>
 
-      <a className="add-channel" onClick={() => setModalIsOpen(true)}>
+      <a className="add-tab" onClick={() => setModalIsOpen(true)}>
         + New Message
       </a>
 

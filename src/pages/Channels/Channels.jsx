@@ -42,25 +42,27 @@ function Channels({ onChannelSelect }) {
 
   return (
     <div className="sidebar">
-      {loading ? (
-        <div>Loading channels...</div>
-      ) : error ? (
-        <div className="error-message">{error}</div>
-      ) : channelList.length === 0 ? (
-        <div>No channels available. Add one to get started!</div>
-      ) : (
-        channelList.map((channel) => (
-          <div
-            key={channel.id}
-            className="channel-tab"
-            onClick={() => onChannelSelect(channel)}
-          >
-            {channel.name}
-          </div>
-        ))
-      )}
+      <div className="sub-container">
+        {loading ? (
+          <div>Loading channels...</div>
+        ) : error ? (
+          <div className="error-message">{error}</div>
+        ) : channelList.length === 0 ? (
+          <div>No channels available. Add one to get started!</div>
+        ) : (
+          channelList.map((channel) => (
+            <div
+              key={channel.id}
+              className="channel-tab"
+              onClick={() => onChannelSelect(channel)}
+            >
+              {channel.name}
+            </div>
+          ))
+        )}
+      </div>
 
-      <a className="add-channel" onClick={() => setModalIsOpen(true)}>
+      <a className="add-tab" onClick={() => setModalIsOpen(true)}>
         + Add Channel
       </a>
 

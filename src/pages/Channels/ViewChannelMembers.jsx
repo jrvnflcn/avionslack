@@ -92,9 +92,9 @@ function ViewChannelMembers({ selectedChannelId, onClose }) {
             {memberList.map((member) => (
               <li key={member.user_id}>
                 {member.uid}
-                <button onClick={() => setIsSendDMOpen(true)}>
+                <a onClick={() => setIsSendDMOpen(true)}>
                   <i className="fa-solid fa-paper-plane"></i>
-                </button>
+                </a>
 
                 <Modal
                   isOpen={isSendDMOpen}
@@ -112,14 +112,18 @@ function ViewChannelMembers({ selectedChannelId, onClose }) {
         )}
         <div className="add-member-section">
           <h4>Add a Member</h4>
-          <input
-            type="email"
-            placeholder="Enter member's email"
-            value={emailInput}
-            onChange={(e) => setEmailInput(e.target.value)}
-          />
-          <button onClick={handleAddMember}>Add Member</button>
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
+          <div className="add-inputs">
+            <input
+              type="email"
+              placeholder="Enter member's email"
+              value={emailInput}
+              onChange={(e) => setEmailInput(e.target.value)}
+            />
+            <a onClick={handleAddMember}>
+              <i className="fa-solid fa-plus"></i>
+            </a>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+          </div>
         </div>
       </div>
     </div>

@@ -23,15 +23,15 @@ code {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #779cbe;
+  background: #779cbe70;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #34526e;
+  background: #779cbe;
 }
 
 ::-webkit-scrollbar-track:hover {
-  background: #779cbe;
+  background: #e0e0e020;
 }
 /* SCROLLBAR changes end */

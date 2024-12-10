@@ -32,10 +32,14 @@ function Dashboard(props) {
       </div>
       <div className="main-layout">
         <div className="sidebar-container">
-          <h4>CHANNELS</h4>
-          <Channels onChannelSelect={handleChannelSelect} />
-          <h4>DIRECT MESSAGES</h4>
-          <DirectMessages onUserSelect={handleUserSelect} />
+          <div className="channels-container">
+            <h4>CHANNELS</h4>
+            <Channels onChannelSelect={handleChannelSelect} />
+          </div>
+          <div className="dms-container">
+            <h4>DIRECT MESSAGES</h4>
+            <DirectMessages onUserSelect={handleUserSelect} />
+          </div>
         </div>
         <div className="content-container">
           {selectedUser ? (

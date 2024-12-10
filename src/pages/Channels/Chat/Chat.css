@@ -1,22 +1,22 @@
 .chat-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 85% 15%;
   height: 100%;
-  padding-bottom: 1.5rem;
   position: relative;
 }
 
 .chat-box {
-  flex-grow: 1;
+  grid-row: 1;
   overflow-y: auto;
-  padding-bottom: 3rem;
+  /* padding-bottom: 3rem; */
 }
 
 .message {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-bottom: 1rem;
+  margin-bottom: 0.25rem;
+  padding: 0 10px;
 }
 
 .message.sent {
@@ -29,26 +29,27 @@
 
 .textbox {
   border: none;
-  border-radius: 10px;
-  background-color: #41678a;
+  background-color: #49739a;
   color: #e0e0e0;
-  padding: 5px;
+  padding: 10px;
   width: fit-content;
   max-width: 20rem;
   margin-bottom: 8px;
 }
 
 .message.sent .textbox {
-  background-color: #3a7b8b;
+  background-color: #3776a5;
+  border-radius: 20px 20px 5px 20px;
 }
 
 .message.received .textbox {
-  background-color: #537b8b;
+  background-color: #1b2734f3;
+  border-radius: 20px 20px 20px 5px;
 }
 
 .sender-name {
   font-weight: bold;
-  color: #050000;
+  color: #e0e0e0;
   margin-bottom: 5px;
   font-size: 0.9rem;
 }

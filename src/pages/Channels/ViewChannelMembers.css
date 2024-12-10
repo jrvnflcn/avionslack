@@ -4,5 +4,46 @@ li {
 }
 
 i {
+  background: none;
+  border: none;
   cursor: pointer;
+}
+
+.add-member-section {
+  padding-top: 10px;
+}
+
+.add-member-section a {
+  display: flex;
+  border: 1px;
+  justify-content: center;
+  align-items: center;
+  color: #e0e0e0;
+  background-color: #3b4a5a;
+  border: 1px solid #e0e0e090;
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+  padding: 0 3px;
+  height: 20px;
+}
+
+.add-inputs {
+  display: flex;
+  align-items: center;
+}
+
+.add-inputs input {
+  border: 1px solid #e0e0e090;
+  border-radius: 5px 0 0 5px;
+  padding: 5px;
+  height: 20px;
+}
+
+.add-inputs input:focus {
+  outline: none !important;
+  border: 1px solid #3776a5;
+}
+
+.add-inputs input::placeholder {
+  color: #00000080;
 }

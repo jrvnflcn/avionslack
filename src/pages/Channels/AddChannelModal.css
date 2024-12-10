@@ -28,7 +28,7 @@
   .modal h2 {
     margin: 0;
     font-size: 1.5rem;
-    color: #333;
+    color: #e0e0e0;
     text-align: center;
   }
   
@@ -88,6 +88,6 @@
   .modal label {
     font-size: 1rem;
     font-weight: bold;
-    color: #333;
+    color: #e0e0e0;
   }
   
