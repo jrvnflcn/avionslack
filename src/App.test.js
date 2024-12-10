@@ -1,8 +1,20 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
-
-test('renders learn react link', () => {
+import userEvent from "@testing-library/user-event";
+import App from "./App";
+test("renders logo", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const logo = screen.getByTestId("logo");
+  expect(logo).toBeInTheDocument();
+});
+
+test("renders sign up", () => {
+  render(<App />);
+  const signUp = screen.getByTestId("sign-up");
+  expect(signUp).toBeInTheDocument();
+});
+
+test("renders forgot password", () => {
+  render(<App />);
+  const forgotPassword = screen.getByTestId("forgot-password");
+  expect(forgotPassword).toBeInTheDocument();
 });

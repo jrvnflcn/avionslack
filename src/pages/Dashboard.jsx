@@ -47,7 +47,7 @@ function Dashboard(props) {
           ) : selectedChannel ? (
             <ChannelContent selectedChannel={selectedChannel} />
           ) : (
-            <p>Please select a channel or a user to start chatting.</p>
+            <h2 className="pending-chat">Please select a channel or a user to start chatting.</h2>
           )}
         </div>
       </div>

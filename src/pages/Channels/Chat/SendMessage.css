@@ -38,7 +38,6 @@ button i {
   color: #e0e0e0;
   background-color: #1b273480;
   border: 1px solid #e0e0e090;
-  border-radius: 5px 0 0 5px;
   padding: 10px;
   resize: none;
 }
@@ -50,4 +49,19 @@ button i {
 
 ::placeholder {
   color: #e0e0e090;
+}
+
+.emoji {
+  display: flex;
+  flex-direction: column;
+  color: #e0e0e0;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 30px;
+  background-color: #1b273480;
+  border: 1px solid #e0e0e090;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  padding: 10px 0;
 }

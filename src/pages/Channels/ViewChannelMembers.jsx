@@ -6,7 +6,7 @@ import { API_URL } from "../../constants/Constants";
 import { useData } from "../../context/DataProvider";
 import SendDirectMessage from "./SendDirectMessage";
 
-Modal.setAppElement("#root");
+Modal.setAppElement("body");
 
 function ViewChannelMembers({ selectedChannelId, onClose }) {
   const { userHeaders } = useData();

@@ -8,7 +8,7 @@ import "./Login.css";
 import flackLogo from "../assets/Slack.png";
 import SignUp from "./SignUp.jsx"; 
 
-Modal.setAppElement("#root");
+Modal.setAppElement("body");
 
 function Login(props) {
   const { onLogin } = props;
@@ -46,7 +46,7 @@ function Login(props) {
 
   return (
     <div className="login-container">
-      <img src={flackLogo} className="login-logo" />
+      <img data-testid="logo" src={flackLogo} className="login-logo" />
       <form onSubmit={handleSubmit}>
         <div>
           <input
@@ -67,13 +67,14 @@ function Login(props) {
         <button type="submit">Login</button>
         <div className="login-footer">
           <a
+            data-testid="sign-up"
             href="#"
             className="sign-up-link"
             onClick={() => setIsSignUpOpen(true)} 
           >
             Sign Up
           </a>
-          <a href="#" className="forgot-password">
+          <a data-testid="forgot-password" href="#" className="forgot-password">
             Forgot Password?
           </a>
         </div>

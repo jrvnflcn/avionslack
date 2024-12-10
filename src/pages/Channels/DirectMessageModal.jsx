@@ -5,7 +5,7 @@ import axios from "axios";
 import { API_URL } from "../../constants/Constants";
 import { useData } from "../../context/DataProvider";
 
-Modal.setAppElement("#root");
+Modal.setAppElement("body");
 
 function DirectMessageModal({ isOpen, onClose, onMessageSent }) {
   const { userHeaders } = useData();

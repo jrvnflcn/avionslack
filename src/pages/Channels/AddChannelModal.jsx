@@ -5,7 +5,7 @@ import axios from "axios";
 import { API_URL } from "../../constants/Constants";
 import "./AddChannelModal.css";
 
-Modal.setAppElement("#root");
+Modal.setAppElement("body");
 
 function AddChannelModal({
   isOpen,

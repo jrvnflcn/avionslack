@@ -3,10 +3,12 @@ import { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../../constants/Constants";
 import { useData } from "../../../context/DataProvider";
+import EmojiPicker from "emoji-picker-react";
 
 function SendMessage({ selectedChannelId, onMessageSent }) {
   const { userHeaders } = useData();
   const [message, setMessage] = useState("");
+  // const [open, setOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,8 +46,21 @@ function SendMessage({ selectedChannelId, onMessageSent }) {
     }
   };
 
+  // const handleEmoji = (e) => {
+  //   setText((prev) => prev + e.emoji);
+  //   setOpen(false);
+  // };
+
   return (
     <div className="sendMessage">
+      <div className="emoji">
+        <i className="fa-solid fa-b"></i>
+        <i className="fa-solid fa-italic"></i>
+        <i className="fa-regular fa-face-smile" /* onClick={() => setOpen(prev => !prev)} */></i>
+        {/* <div className="picker">
+          <EmojiPicker open={open} onEmojiClick={handleEmoji} />
+        </div> */}
+      </div>
       <form onSubmit={handleSubmit}>
         <textarea
           type="text"
